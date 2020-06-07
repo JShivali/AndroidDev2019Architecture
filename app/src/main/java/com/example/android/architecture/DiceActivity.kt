@@ -1,6 +1,7 @@
 package com.example.android.architecture
 
 import android.os.Bundle
+import android.view.Menu
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -68,4 +69,8 @@ class DiceActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_dice,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 }
