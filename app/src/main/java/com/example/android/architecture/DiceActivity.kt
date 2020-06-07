@@ -1,7 +1,9 @@
 package com.example.android.architecture
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -72,6 +74,30 @@ class DiceActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_dice, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId){
+            R.id.action_share -> shareResult()
+            else -> super.onOptionsItemSelected(item)
+        }
+
+    }
+
+    private fun shareResult(): Boolean {
+
+        // Allows you to access multiple members of the object without having to mention the object name.
+        // sort of kotlin equivalent of builders in java
+
+        val intent = Intent().apply {
+            action=Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT,"I rolled the dice: ${viewModel.headline.value}")
+            type="text/plain"
+        }
+
+        startActivity(intent)
+        return true
+
     }
 
 }
